@@ -1,29 +1,37 @@
+# Core dependencies
 streamlit==1.25.0
-geemap==0.19.6
-earthengine-api==0.1.343
-geopandas==0.14.0
-rasterio==1.3.8
-numpy==1.26.0
-opencv-python-headless==4.8.0
-matplotlib==3.8.1
-scikit-image==0.21.0
-shapely==2.1.1
-pandas==2.1.3
-folium==0.14.0
-fiona==1.9.4.post1
-pyproj==3.6.0
-psutil==5.9.6
 streamlit-folium==0.12.0
-requests==2.31.0
-altair==5.1.2
-statistics==1.0.3.5
-netCDF4==1.6.4
-Pillow==10.0.1
-mpl_toolkits==0.1.0
+altair==5.0.1
+folium==0.14.0
+
+# Google Earth Engine and geospatial tools
+earthengine-api==0.1.343
+geemap==0.19.6
+geopandas==0.14.0
+fiona==1.9.5
+rasterio==1.3.8
+shapely==2.0.1
+pyproj==3.7.0
+
+# Scientific and numerical libraries
+numpy==1.25.2
+pandas==2.1.3
 scipy==1.11.3
+scikit-image==0.22.0
+netCDF4==1.6.5
+matplotlib==3.8.2
 
-# OpenAI for Llama Chatbot integration
+# OpenAI and requests for API integrations
 openai==0.28.1
+requests==2.31.0
 
-# Add Ollama library (replace with actual Python library if available)
-ollama==0.1.0
+# Miscellaneous tools
+psutil==5.9.5
+pillow==9.4.0  # Adjusted for Streamlit compatibility
+
+# Navigation bar for Streamlit
+streamlit-navigation-bar==0.1.8
+
+# GDAL for geospatial libraries
+gdal==3.7.0
+
