@@ -1,5 +1,6 @@
 # Core dependencies
 streamlit==1.25.0
+streamlit-navigation-bar==0.1.8
 streamlit-folium==0.12.0
 altair==5.0.1
 folium==0.14.0
