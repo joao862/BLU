@@ -68,6 +68,7 @@ import streamlit as st
 from streamlit_navigation_bar import st_navbar
 
 pages = ["Home", "About", "Tutorial", "Worldwide Analysis", "Portugal Analysis"]
+print(pages)
 styles = {
     "nav": {
         "background-color": "rgba(0, 0, 0, 0.5)",
