@@ -109,17 +109,29 @@ import streamlit as st
 #ee.Authenticate() 
 #use this line if necessary to authenticate on Google Earth Engine API project
 
-# Service account email and private key file path
-service_account = 'blu-301@ee-joaopedromateusp.iam.gserviceaccount.com'
-key_file = '/Users/joaopimenta/Downloads/ee-joaopedromateusp-80c93814481c.json'  # Path to your private key JSON file
+import os
+import json
+import ee
+from google.oauth2.service_account import Credentials
 
-# Authenticate and initialize
-credentials = ee.ServiceAccountCredentials(service_account, key_file)
+# Retrieve the service account JSON from the environment variable
+json_secret = os.environ.get('GEE_SECRET_KEY')
+
+if not json_secret:
+    raise ValueError("SERVICE_ACCOUNT_KEY is not set in the environment variables.")
+
+# Parse the JSON string to a dictionary
+service_account_info = json.loads(json_secret)
+
+# Extract the service account email (optional, for debugging or logging purposes)
+service_account_email = service_account_info.get('client_email', 'Unknown')
+
+# Authenticate using the parsed JSON
+credentials = Credentials.from_service_account_info(service_account_info)
 ee.Initialize(credentials)
+
 # Test the initialization
-print("Google Earth Engine initialized with service account!")
-# Initialize the Earth Engine library.
-ee.Initialize()
+print(f"Google Earth Engine initialized with service account: {service_account_email}")
 
 # Function to process uploaded GeoJSON or KML file and return a GeoDataFrame
 def process_uploaded_file(data):
