@@ -68,7 +68,7 @@ import streamlit as st
 import time
 
 # Define pages
-pages = ["Home", "About", "Tutorial", "Worldwide Analysis"]
+pages = ["Worldwide Analysis, Home", "About", "Tutorial"]
 
 # Define styles
 styles = {
