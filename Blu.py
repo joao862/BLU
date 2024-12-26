@@ -33,11 +33,8 @@ import requests
 from io import StringIO
 from rasterio.warp import calculate_default_transform, reproject, Resampling
 
-
-
 # Set page configuration
 st.set_page_config(layout="wide")
-
 
 # Define the custom CSS style for the title and subtitle
 custom_css = """
@@ -71,9 +68,7 @@ custom_css = """
 import streamlit as st
 from streamlit_navigation_bar import st_navbar
 
-
 pages = ["Home", "About", "Tutorial", "Worldwide Analysis"]
-st.write(pages)
 styles = {
     "nav": {
         "background-color": "rgba(0, 0, 0, 0.5)",
