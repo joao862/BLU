@@ -154,7 +154,7 @@ st.sidebar.markdown(
 # Create unique keys for each st.radio widget
 world_key = "Worldwide anaysis"
 if page == 'Home':
-    video_path = "/Users/joaopimenta/Downloads/Master thesis/1851190-uhd_3840_2160_25fps.mp4"
+    video_path = "https://raw.githubusercontent.com/joao862/BLU/main/1851190-uhd_3840_2160_25fps.mp4"
     # Read the video file
     with open(video_path, "rb") as file:
         video_bytes = file.read()
