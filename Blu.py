@@ -66,60 +66,31 @@ custom_css = """
 
 import streamlit as st
 from streamlit_navigation_bar import st_navbar
-import time
 
-# Define pages
-pages = ["Worldwide Analysis, Home", "About", "Tutorial"]
-
-# Define styles
+pages = ["Home", "About", "Tutorial", "Worldwide Analysis", "Portugal Analysis"]
 styles = {
     "nav": {
-        "background-color": "rgba(0, 0, 0, 0.5)",  # Add 50% transparency
+        "background-color": "rgba(0, 0, 0, 0.5)",
+        # Add 50% transparency
     },
     "div": {
         "max-width": "32rem",
     },
     "span": {
         "border-radius": "0.26rem",
-        "color": "rgb(255, 255, 255)",
+        "color": "rgb(255    ,255,    255)",
         "margin": "0 0.225rem",
         "padding": "0.375rem 0.625rem",
     },
     "active": {
-        "background-color": "rgba(0, 0, 200, 0.95)",
+        "background-color": "rgba(0    ,0,    200, 0.95)",
     },
     "hover": {
         "background-color": "rgba(255, 255, 255, 0.95)",
     },
 }
 
-# Initialize the session state for page navigation
-if "current_page" not in st.session_state:
-    st.session_state.current_page = "Home"
-
-# Timer configuration
-redirect_time = 10  # seconds to wait before redirecting
-
-# Navbar
 page = st_navbar(pages, styles=styles)
-
-if st.session_state.current_page == "Home":
-    st.markdown("<h1>Welcome to Home Page</h1>", unsafe_allow_html=True)
-    st.markdown("<p>You will be redirected to Worldwide Analysis in a few seconds...</p>", unsafe_allow_html=True)
-    
-    # Timer countdown
-    countdown_placeholder = st.empty()
-    for remaining in range(redirect_time, 0, -1):
-        countdown_placeholder.markdown(f"<h2>Redirecting in {remaining} seconds...</h2>", unsafe_allow_html=True)
-        time.sleep(1)
-    
-    # Redirect after countdown
-    st.session_state.current_page = "Worldwide Analysis"
-    st.experimental_rerun()
-
-elif st.session_state.current_page == "Worldwide Analysis":
-    st.markdown("<h1>Welcome to Worldwide Analysis Page</h1>", unsafe_allow_html=True)
-
 
 # Apply the custom CSS style and HTML title using Markdown
 st.markdown(f"{custom_css}<h1 class='title-custom-style'>Real-Time Reservoir Monitoring Platform</h1>", unsafe_allow_html=True)
