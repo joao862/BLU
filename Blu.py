@@ -102,37 +102,23 @@ page = st_navbar(pages, styles=styles)
 st.markdown(f"{custom_css}<h1 class='title-custom-style'>Real-Time Reservoir Monitoring Platform</h1>", unsafe_allow_html=True)
 st.markdown("<h2 class='subtitle-custom-style'>This software allows you to monitorize the volume storage of almost any water body at your choice. It is still in beta version.</h2>", unsafe_allow_html=True)
 
-import psutil
-import streamlit as st
-
-# Authenticate to the Earth Engine servers
-#ee.Authenticate() 
-#use this line if necessary to authenticate on Google Earth Engine API project
-
+import ee
 import os
 import json
-import ee
-from google.oauth2.service_account import Credentials
 
-# Retrieve the service account JSON from the environment variable
-json_secret = os.environ.get('GEE_SECRET_KEY')
+# Load GEE service account key from environment variable
+key_path = 'service_account.json'  # Temporary local file
+# Write the secret to a temporary file (from GitHub secret)
+with open(key_path, 'w') as key_file:
+    key_file.write(os.environ['GEE_SECRET_KEY'])
 
-if not json_secret:
-    raise ValueError("GEE_SECRET_KEY is not set in the environment variables.")
+# Authenticate with GEE
+service_account = json.load(open(key_path))['client_email']
+ee.Initialize(credentials=ee.ServiceAccountCredentials(service_account, key_path))
 
-# Parse the JSON string to a dictionary
-service_account_info = json.loads(json_secret)
-
-# Extract the service account email (optional, for debugging or logging purposes)
-service_account_email = service_account_info.get('client_email', 'Unknown')
-
-# Authenticate using the parsed JSON
-credentials = Credentials.from_service_account_info(service_account_info)
-ee.Initialize(credentials)
-
-# Test the initialization
-print(f"Google Earth Engine initialized with service account: {service_account_email}")
-
+print("Google Earth Engine initialized successfully.")
+# Clean up the temporary file
+os.remove(key_path)
 # Function to process uploaded GeoJSON or KML file and return a GeoDataFrame
 def process_uploaded_file(data):
     _, file_extension = os.path.splitext(data.name)
