@@ -154,26 +154,42 @@ st.sidebar.markdown(
 # Create unique keys for each st.radio widget
 world_key = "Worldwide anaysis"
 if page == 'Home':
-    video_path = "https://go.screenpal.com/watch/cZlO0ZneXzj"
-    # Read the video file
-    with open(video_path, "rb") as file:
-        video_bytes = file.read()
+    import streamlit as st
+    import requests
+    import base64
+
+# Video URL (ensure it's accessible)
+    video_url = "https://raw.githubusercontent.com/joao862/BLU/main/1851190-uhd_3840_2160_25fps.mp4"
+
+# Fetch the video from the URL
+    response = requests.get(video_url)
+
+# Check if the request was successful
+    if response.status_code == 200:
+        video_bytes = response.content
     
     # Convert the video bytes to Base64
-    video_base64 = base64.b64encode(video_bytes).decode("utf-8")
+        video_base64 = base64.b64encode(video_bytes).decode("utf-8")
     
-    #Set the background video using CSS
-    st.markdown(
-        f"""
-        <style>
-        .stApp {{
-            background-image: url('data:video/mp4;base64,{video_base64}');
-            background-size: cover;
-        }}
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+    # Set the background video using CSS
+        st.markdown(
+           f"""
+           <style>
+           .stApp {{
+               background-image: url('data:video/mp4;base64,{video_base64}');
+               background-size: cover;
+            }}
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+    else:
+        st.error("Failed to load video. Please check the URL or your internet connection.")
+
+# Streamlit content
+st.title("Streamlit Video Background Example")
+st.write("This is an example of using a background video in Streamlit.")
+
     
 elif page == "Worldwide Analysis":
     st.title("Worldwide Analysis")
