@@ -118,7 +118,7 @@ from google.oauth2.service_account import Credentials
 json_secret = os.environ.get('GEE_SECRET_KEY')
 
 if not json_secret:
-    raise ValueError("SERVICE_ACCOUNT_KEY is not set in the environment variables.")
+    raise ValueError("GEE_SECRET_KEY is not set in the environment variables.")
 
 # Parse the JSON string to a dictionary
 service_account_info = json.loads(json_secret)
