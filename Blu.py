@@ -68,30 +68,67 @@ custom_css = """
 import streamlit as st
 from streamlit_navigation_bar import st_navbar
 
+import streamlit as st
+
+# Define pages
 pages = ["Home", "About", "Tutorial", "Worldwide Analysis"]
+
+# Define styles
 styles = {
     "nav": {
-        "background-color": "rgba(0, 0, 0, 0.5)",
-        # Add 50% transparency
+        "background-color": "rgba(0, 0, 0, 0.5)",  # Add 50% transparency
     },
     "div": {
         "max-width": "32rem",
     },
     "span": {
         "border-radius": "0.26rem",
-        "color": "rgb(255    ,255,    255)",
+        "color": "rgb(255, 255, 255)",
         "margin": "0 0.225rem",
         "padding": "0.375rem 0.625rem",
     },
     "active": {
-        "background-color": "rgba(0    ,0,    200, 0.95)",
+        "background-color": "rgba(0, 0, 200, 0.95)",
     },
     "hover": {
         "background-color": "rgba(255, 255, 255, 0.95)",
     },
 }
 
+# Initialize the session state for page navigation
+if "current_page" not in st.session_state:
+    st.session_state.current_page = "Home"
+
+# Define navbar logic
 page = st_navbar(pages, styles=styles)
+
+# Apply the custom CSS style and HTML title using Markdown
+st.markdown(
+    f"<style>/* Custom CSS styles */</style>"
+    "<h1 class='title-custom-style'>Real-Time Reservoir Monitoring Platform</h1>",
+    unsafe_allow_html=True,
+)
+st.markdown(
+    "<h2 class='subtitle-custom-style'>This software allows you to monitor the volume storage of almost any water body of your choice. It is still in beta version.</h2>",
+    unsafe_allow_html=True,
+)
+# Auto-redirect logic
+if st.session_state.current_page == "Home":
+    st.markdown("<p>Redirecting to Worldwide Analysis in 5 seconds...</p>", unsafe_allow_html=True)
+    
+    # Inject JavaScript for redirection
+    st.markdown(
+        """
+        <script>
+        setTimeout(function() {
+            window.location.href = "/?page=Worldwide%20Analysis";
+        }, 5000); // 5000 ms = 5 seconds
+        </script>
+        """,
+        unsafe_allow_html=True,
+    )
+elif st.session_state.current_page == "Worldwide Analysis":
+    st.markdown("<h2>Welcome to the Worldwide Analysis Page</h2>")
 
 # Apply the custom CSS style and HTML title using Markdown
 st.markdown(f"{custom_css}<h1 class='title-custom-style'>Real-Time Reservoir Monitoring Platform</h1>", unsafe_allow_html=True)
