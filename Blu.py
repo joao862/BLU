@@ -101,21 +101,26 @@ page = st_navbar(pages, styles=styles)
 st.markdown(f"{custom_css}<h1 class='title-custom-style'>Real-Time Reservoir Monitoring Platform</h1>", unsafe_allow_html=True)
 st.markdown("<h2 class='subtitle-custom-style'>This software allows you to monitorize the volume storage of almost any water body at your choice. It is still in beta version.</h2>", unsafe_allow_html=True)
 
-# Access secrets
-firebase_secrets = st.secrets["firebase"]
+import streamlit as st
+import json
 
-# Write secrets to a JSON file (if needed by GEE)
+# Load the firebase credentials from the secrets file
+firebase_secrets = st.secrets["firebase"]["my_project_settings"]
+
+# Convert the string representation of the dictionary to an actual dictionary
+firebase_secrets_dict = json.loads(firebase_secrets.replace("=", ":"))
+
+# Now you can access individual fields
+client_email = firebase_secrets_dict["client_email"]
+private_key = firebase_secrets_dict["private_key"]
+
+# Example of printing the client email
+st.write("Client Email:", client_email)
+
+# Example of writing the dictionary to a file (if necessary)
 with open("service_account.json", "w") as f:
-    json.dump(firebase_secrets, f)
+    json.dump(firebase_secrets_dict, f)
 
-# Initialize Google Earth Engine
-ee.Initialize(ee.ServiceAccountCredentials(
-    email=firebase_secrets["client_email"], 
-    key_file="service_account.json"
-))
-
-st.title("Google Earth Engine with Streamlit")
-st.write("GEE initialized successfully!")
 # Function to process uploaded GeoJSON or KML file and return a GeoDataFrame
 def process_uploaded_file(data):
     _, file_extension = os.path.splitext(data.name)
