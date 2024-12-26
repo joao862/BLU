@@ -97,28 +97,25 @@ styles = {
 
 page = st_navbar(pages, styles=styles)
 
-    
 # Apply the custom CSS style and HTML title using Markdown
 st.markdown(f"{custom_css}<h1 class='title-custom-style'>Real-Time Reservoir Monitoring Platform</h1>", unsafe_allow_html=True)
 st.markdown("<h2 class='subtitle-custom-style'>This software allows you to monitorize the volume storage of almost any water body at your choice. It is still in beta version.</h2>", unsafe_allow_html=True)
 
-import ee
-import os
-import json
+# Access secrets
+firebase_secrets = st.secrets["firebase"]
 
-# Load GEE service account key from environment variable
-key_path = 'service_account.json'  # Temporary local file
-# Write the secret to a temporary file (from GitHub secret)
-with open(key_path, 'w') as key_file:
-    key_file.write(os.environ['GEE_SECRET_KEY'])
+# Write secrets to a JSON file (if needed by GEE)
+with open("service_account.json", "w") as f:
+    json.dump(firebase_secrets, f)
 
-# Authenticate with GEE
-service_account = json.load(open(key_path))['client_email']
-ee.Initialize(credentials=ee.ServiceAccountCredentials(service_account, key_path))
+# Initialize Google Earth Engine
+ee.Initialize(ee.ServiceAccountCredentials(
+    email=firebase_secrets["client_email"], 
+    key_file="service_account.json"
+))
 
-print("Google Earth Engine initialized successfully.")
-# Clean up the temporary file
-os.remove(key_path)
+st.title("Google Earth Engine with Streamlit")
+st.write("GEE initialized successfully!")
 # Function to process uploaded GeoJSON or KML file and return a GeoDataFrame
 def process_uploaded_file(data):
     _, file_extension = os.path.splitext(data.name)
