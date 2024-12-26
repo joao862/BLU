@@ -114,9 +114,6 @@ firebase_secrets_dict = json.loads(firebase_secrets.replace("=", ":"))
 client_email = firebase_secrets_dict["client_email"]
 private_key = firebase_secrets_dict["private_key"]
 
-# Example of printing the client email
-st.write("Client Email:", client_email)
-
 # Example of writing the dictionary to a file (if necessary)
 with open("service_account.json", "w") as f:
     json.dump(firebase_secrets_dict, f)
