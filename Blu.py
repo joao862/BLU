@@ -186,9 +186,9 @@ if page == 'Home':
     else:
         st.error("Failed to load video. Please check the URL or your internet connection.")
 
-# Streamlit content
-st.title("Streamlit Video Background Example")
-st.write("This is an example of using a background video in Streamlit.")
+    # Streamlit content
+    st.title("Streamlit Video Background Example")
+    st.write("This is an example of using a background video in Streamlit.")
 
     
 elif page == "Worldwide Analysis":
