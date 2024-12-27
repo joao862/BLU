@@ -175,7 +175,7 @@ elif page == "Worldwide Analysis":
     import ee
     import streamlit as st
     service_account = 'blu-301@ee-joaopedromateusp.iam.gserviceaccount.com'
-    key_file = 'https://raw.githubusercontent.com/joao862/BLU/main/ee-joaopedromateusp-80c93814481c.json'  # Path to your private key JSON file
+    key_file = 'https://github.com/joao862/BLU/blob/main/ee-joaopedromateusp-80c93814481c.json'  # Path to your private key JSON file
 
     # Authenticate and initialize
     credentials = ee.ServiceAccountCredentials(service_account, key_file)
