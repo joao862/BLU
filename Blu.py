@@ -174,40 +174,10 @@ elif page == "Worldwide Analysis":
     import ee
     import tempfile
     import os
-
-    if "firebase" in st.secrets and "my_project_settings" in st.secrets["firebase"]:
-        config_str = st.secrets["firebase"]["my_project_settings"]
-    
-        if isinstance(config_str, str):
-            config_str = config_str.replace("=", ":")
-            try:
-                firebase_config = json.loads(config_str)
-                private_key = firebase_config.get("private_key", "")
-                if private_key:
-                    private_key = private_key.replace("\\n", "\n")
-                firebase_config["private_key"] = private_key
-
-                with tempfile.NamedTemporaryFile(delete=False, mode='w', encoding='utf-8') as temp_file:
-                    json.dump(firebase_config, temp_file, indent=4)
-                    temp_file_path = temp_file.name
-
-                try:
-                    service_account = firebase_config["client_email"]
-
-                    credentials = ee.ServiceAccountCredentials(service_account, temp_file_path)
-                    ee.Initialize(credentials)
-                    st.write("Google Earth Engine inicializado com sucesso!")
-                except Exception as e:
-                    st.error(f"Erro ao inicializar o Earth Engine: {e}")
-                os.remove(temp_file_path)
-
-            except json.JSONDecodeError as e:
-                st.error(f"Erro ao decodificar JSON: {e}")
-        else:
-            st.error("O valor de 'my_project_settings' não é uma string.")
-    else:
-         st.error("As chaves 'firebase' ou 'my_project_settings' não foram encontradas em st.secrets.")
-
+    from google.auth import compute_engine
+    import ee
+    credentials = compute_engine.Credentials(scopes=['https://www.googleapis.com/auth/earthengine'])
+    ee.Initialize(credentials)
     # File uploader for GeoJSON or KML
     uploaded_file = st.file_uploader("Upload a GeoJSON or KML File")
 
