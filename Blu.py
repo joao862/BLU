@@ -166,37 +166,40 @@ if page == 'Home':
 	    
 elif page == "Worldwide Analysis":
     st.title("Worldwide Analysis")
-    import streamlit as st
+    import toml
     import json
-    import streamlit as st
-    import json
-    import ee
-    import streamlit as st
-    import json
-    import ee
 
-# Carregar as credenciais da conta de serviço do st.secrets
-    gee_secrets = st.secrets["firebase"]["my_project_settings"]
+# Função para ler o arquivo TOML e converter para JSON
+    def toml_to_json(toml_file):
+    # Lê o conteúdo do arquivo .toml
+       with open(toml_file, 'r') as file:
+         toml_data = toml.load(file)
+    
+    # Extrai a chave específica
+       firebase_settings = toml_data.get('firebase', {}).get('my_project_settings', '')
+    
+    # Converte a chave 'my_project_settings' (que é uma string) para um dicionário JSON
+       if firebase_settings:
+        # Remover a parte inicial e final da string JSON (aspas duplas)
+          firebase_settings = firebase_settings.strip('""')
+          firebase_settings = json.loads(firebase_settings)
+    
+    # Converte o conteúdo completo para JSON
+       return json.dumps(toml_data, indent=4), firebase_settings
 
-# Corrigir o formato do JSON
-    gee_secrets_dict = json.loads(gee_secrets.replace("=", ":"))
+	# Caminho para o arquivo .toml
+    toml_file = 'seu_arquivo.toml'
+	
+	# Chama a função e pega os resultados
+    json_data, firebase_data = toml_to_json(toml_file)
+	
+	# Exibe o JSON completo
+    print("JSON Completo:")
+    print(json_data)
+	# Exibe o conteúdo de 'my_project_settings' como um JSON
+    print("\nFirebase Config (my_project_settings) como JSON:")
+    print(json.dumps(firebase_data, indent=4))
 
-# Corrigir o formato da chave privada
-    gee_secrets_dict["private_key"] = gee_secrets_dict["private_key"].replace("\\n", "\n")
-
-    try:
-    # Extrair o e-mail da conta de serviço
-        service_account = gee_secrets_dict["client_email"]
-
-    # Inicializar o Earth Engine com as credenciais
-        credentials = ee.ServiceAccountCredentials(
-	    service_account,  # Email da conta de serviço
-	    key_data=json.dumps(gee_secrets_dict)  # Chave privada como string JSON
-        )
-        ee.Initialize(credentials)
-        st.success("Google Earth Engine inicializado com sucesso!")
-    except Exception as e:
-        st.error(f"Erro ao inicializar o Google Earth Engine: {e}")
 
     # File uploader for GeoJSON or KML
     uploaded_file = st.file_uploader("Upload a GeoJSON or KML File")
