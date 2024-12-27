@@ -170,18 +170,30 @@ elif page == "Worldwide Analysis":
     import json
     import json
     import streamlit as st
-    # Recupera configuração de secrets
-    firebase_settings = st.secrets["firebase"]["my_project_settings"]
-    # Corrigir o formato do JSON substituindo "=" por ":"
-    config_str = config_str.replace("=", ":")
+
     st.write("What the hell is wrong here?")
-    st.write(config_str)
-# Tente converter para JSON
-    try:
-        firebase_settings_json = json.loads(config_str)
-        st.write("Firebase Config:", firebase_settings_json)
-    except json.JSONDecodeError as e:
-        st.error(f"Erro ao decodificar JSON: {e}")
+    import streamlit as st
+    import json
+
+    if "firebase" in st.secrets and "my_project_settings" in st.secrets["firebase"]:
+        config_str = st.secrets["firebase"]["my_project_settings"]
+    
+    # Verifique se config_str é uma string antes de continuar
+       if isinstance(config_str, str):
+        # Substituir "=" por ":"
+           config_str = config_str.replace("=", ":")
+
+        # Tente decodificar o JSON
+           try:
+               firebase_config = json.loads(config_str)
+               st.write("Configuração Firebase:", firebase_config)
+           except json.JSONDecodeError as e:
+               st.error(f"Erro ao decodificar JSON: {e}")
+       else:
+           st.error("O valor de 'my_project_settings' não é uma string.")
+    else:
+        st.error("As chaves 'firebase' ou 'my_project_settings' não foram encontradas em st.secrets.")
+
     # File uploader for GeoJSON or KML
     uploaded_file = st.file_uploader("Upload a GeoJSON or KML File")
 
