@@ -174,20 +174,7 @@ elif page == "Worldwide Analysis":
     from google.oauth2 import service_account
     import ee
     import streamlit as st
-
-    def get_auth():
-        # Load service account keys from Streamlit secrets
-        service_account_keys = st.secrets["my_project_settings"]
-
-        # Create credentials from service account info
-        credentials = service_account.Credentials.from_service_account_info(service_account_keys, scopes=ee.auth.SCOPES)
-
-        # Initialize Earth Engine with the credentials
-        ee.Initialize(credentials)
-
-        # Return a success message
-        return st.write('Successfully synced to GEE')
-
+    geemap.ee_initialize()
     # File uploader for GeoJSON or KML
     uploaded_file = st.file_uploader("Upload a GeoJSON or KML File")
 
