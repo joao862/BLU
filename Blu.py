@@ -208,8 +208,8 @@ elif page == "Worldwide Analysis":
         except requests.exceptions.RequestException as e:
             st.error(f"Error downloading the service account file: {e}")
 
-# Call the authentication function
-get_auth()
+    # Call the authentication function
+    get_auth()
 
     # File uploader for GeoJSON or KML
     uploaded_file = st.file_uploader("Upload a GeoJSON or KML File")
