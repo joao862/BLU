@@ -168,12 +168,12 @@ elif page == "Worldwide Analysis":
     st.title("Worldwide Analysis")
     import toml
     import json
-    import json
     import streamlit as st
 
     st.write("What the hell is wrong here?")
-    import streamlit as st
-    import json
+    import ee
+    import tempfile
+    import os
 
     if "firebase" in st.secrets and "my_project_settings" in st.secrets["firebase"]:
         config_str = st.secrets["firebase"]["my_project_settings"]
@@ -181,30 +181,38 @@ elif page == "Worldwide Analysis":
     # Verifique se config_str é uma string antes de continuar
         if isinstance(config_str, str):
         # Substituir "=" por ":"
-           config_str = config_str.replace("=", ":")
+            config_str = config_str.replace("=", ":")
 
         # Tente decodificar o JSON
-           try:
-               firebase_config = json.loads(config_str)
-               import ee
-               import streamlit as st
-               # Inicialize o Google Earth Engine com as credenciais
-               try:
-                   # Substitua os valores pelas credenciais corretas
-                   service_account = 'blu-301@ee-joaopedromateusp.iam.gserviceaccount.com'
-                   # Usando credenciais de conta de serviço
-                   credentials = ee.ServiceAccountCredentials(service_account, firebase_config)
-                   # Inicializa o cliente Earth Engine
-                   ee.Initialize(credentials)
-                   st.write("Google Earth Engine inicializado com sucesso!")
-               except Exception as e:
-                      st.error(f"Erro ao inicializar o Earth Engine: {e}")
-           except json.JSONDecodeError as e:
-               st.error(f"Erro ao decodificar JSON: {e}")
+            try:
+                firebase_config = json.loads(config_str)
+            
+            # Crie um arquivo JSON temporário com as configurações
+                with tempfile.NamedTemporaryFile(delete=False, mode='w', encoding='utf-8') as temp_file:
+                    json.dump(firebase_config, temp_file, indent=4)
+                    temp_file_path = temp_file.name
+
+            # Inicializar o Google Earth Engine com o caminho do arquivo JSON
+                try:
+                    service_account = firebase_config["client_email"]
+                # Usando credenciais de conta de serviço
+                    credentials = ee.ServiceAccountCredentials(service_account, temp_file_path)
+                # Inicializa o cliente do Earth Engine
+                    ee.Initialize(credentials)
+                    st.write("Google Earth Engine inicializado com sucesso!")
+                except Exception as e:
+                    st.error(f"Erro ao inicializar o Earth Engine: {e}")
+
+            # Após o uso, remova o arquivo temporário
+                os.remove(temp_file_path)
+
+            except json.JSONDecodeError as e:
+                st.error(f"Erro ao decodificar JSON: {e}")
         else:
-           st.error("O valor de 'my_project_settings' não é uma string.")
+            st.error("O valor de 'my_project_settings' não é uma string.")
     else:
         st.error("As chaves 'firebase' ou 'my_project_settings' não foram encontradas em st.secrets.")
+
     # File uploader for GeoJSON or KML
     uploaded_file = st.file_uploader("Upload a GeoJSON or KML File")
 
