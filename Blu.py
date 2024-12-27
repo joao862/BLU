@@ -169,17 +169,17 @@ elif page == "Worldwide Analysis":
     import json
 
 # Load the firebase credentials from the secrets file
-   firebase_secrets = st.secrets["firebase"]["my_project_settings"]
+    firebase_secrets = st.secrets["firebase"]["my_project_settings"]
 
 # Convert the string representation of the dictionary to an actual dictionary
-   firebase_secrets_dict = json.loads(firebase_secrets.replace("=", ":"))
+    firebase_secrets_dict = json.loads(firebase_secrets.replace("=", ":"))
 
 # Now you can access individual fields
-   client_email = firebase_secrets_dict["client_email"]
-   private_key = firebase_secrets_dict["private_key"]
+    client_email = firebase_secrets_dict["client_email"]
+    private_key = firebase_secrets_dict["private_key"]
 
 # Example of writing the dictionary to a file (if necessary)
-   with open("service_account.json", "w") as f:
+    with open("service_account.json", "w") as f:
        json.dump(firebase_secrets_dict, f)
     # File uploader for GeoJSON or KML
     uploaded_file = st.file_uploader("Upload a GeoJSON or KML File")
