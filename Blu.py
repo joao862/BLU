@@ -186,13 +186,13 @@ elif page == "Worldwide Analysis":
         # Tente decodificar o JSON
            try:
                firebase_config = json.loads(config_str)
-	       st.write(firebase_config)
                import ee
                import streamlit as st
                # Inicialize o Google Earth Engine com as credenciais
                try:
                    # Substitua os valores pelas credenciais corretas
                    service_account = 'blu-301@ee-joaopedromateusp.iam.gserviceaccount.com'
+		   st.write(firebase_config)
                    # Usando credenciais de conta de serviço
                    credentials = ee.ServiceAccountCredentials(service_account, firebase_config)
                    # Inicializa o cliente Earth Engine
