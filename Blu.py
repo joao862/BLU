@@ -170,23 +170,13 @@ elif page == "Worldwide Analysis":
     import json
     import json
     import streamlit as st
-
+    # Recupera configuração de secrets
+    firebase_settings = st.secrets["firebase"]["my_project_settings"]
+# Tente converter para JSON
     try:
-        # Acessa a chave secreta configurada no Streamlit
-        firebase_settings = st.secrets["firebase"]["my_project_settings"]
-
-        # Converte a string JSON carregada da chave em um dicionário Python
         firebase_settings_json = json.loads(firebase_settings)
-
-        # Exibe as configurações carregadas
         st.write("Firebase Config:", firebase_settings_json)
-
-    except KeyError as e:
-        # Lida com casos onde a chave não existe
-        st.error(f"Chave ausente em 'st.secrets': {e}")
-
     except json.JSONDecodeError as e:
-        # Lida com erros ao converter JSON
         st.error(f"Erro ao decodificar JSON: {e}")
     # File uploader for GeoJSON or KML
     uploaded_file = st.file_uploader("Upload a GeoJSON or KML File")
