@@ -193,7 +193,13 @@ elif page == "Worldwide Analysis":
            st.error("O valor de 'my_project_settings' não é uma string.")
     else:
         st.error("As chaves 'firebase' ou 'my_project_settings' não foram encontradas em st.secrets.")
-
+    # Service account email and private key file path
+    service_account = 'blu-301@ee-joaopedromateusp.iam.gserviceaccount.com'
+    # Authenticate and initialize
+    credentials = ee.ServiceAccountCredentials(service_account, firebase_config)
+    ee.Initialize(credentials)
+    # Test the initialization
+    st.write("Google Earth Engine initialized with service account!")
     # File uploader for GeoJSON or KML
     uploaded_file = st.file_uploader("Upload a GeoJSON or KML File")
 
