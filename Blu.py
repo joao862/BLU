@@ -92,7 +92,17 @@ styles = {
     },
 }
 
-page = st_navbar(pages, styles=styles)
+# Define uma variável para armazenar a página selecionada
+if "selected_page" not in st.session_state:
+    st.session_state.selected_page = "Home"  # Página inicial padrão
+
+# Muda automaticamente para "Worldwide Analysis" após 10 segundos
+if st.session_state.selected_page == "Home":  # Ou outra página de início
+    time.sleep(10)  # Espera 10 segundos
+    st.session_state.selected_page = "Worldwide Analysis"
+
+# Renderiza a barra de navegação com a página selecionada
+page = st_navbar(pages, styles=styles, default=st.session_state.selected_page)
 
 # Apply the custom CSS style and HTML title using Markdown
 st.markdown(f"{custom_css}<h1 class='title-custom-style'>Real-Time Reservoir Monitoring Platform</h1>", unsafe_allow_html=True)
