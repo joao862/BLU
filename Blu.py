@@ -36,6 +36,7 @@ from rasterio.warp import calculate_default_transform, reproject, Resampling
 # Set page configuration
 st.set_page_config(layout="wide")
 
+
 # Define the custom CSS style for the title and subtitle
 custom_css = """
 <style>
@@ -167,17 +168,35 @@ elif page == "Worldwide Analysis":
     st.title("Worldwide Analysis")
     import streamlit as st
     import json
+    import streamlit as st
+    import json
+    import ee
 
-# Load the firebase credentials from the secrets file
-    firebase_secrets = st.secrets["firebase"]["my_project_settings"]
+# Carregar as credenciais da conta de serviço a partir de st.secrets
+    gee_secrets = st.secrets["firebase"]["my_project_settings"]
 
-# Convert the string representation of the dictionary to an actual dictionary
-    firebase_secrets_dict = json.loads(firebase_secrets.replace("=", ":"))
+# Converter a string para um dicionário Python
+    gee_credentials_dict = json.loads(gee_secrets.replace("=", ":"))
 
-# Now you can access individual fields
-    client_email = firebase_secrets_dict["client_email"]
-    private_key = firebase_secrets_dict["private_key"]
+# Certifique-se de que a chave privada está formatada corretamente
+    gee_credentials_dict["private_key"] = gee_credentials_dict["private_key"].replace("\\n", "\n")
 
+# Criar as credenciais da conta de serviço
+    try:
+    # Extrair o e-mail da conta de serviço
+       service_account = gee_credentials_dict["client_email"]
+    
+    # Transformar o dicionário em um JSON string para passar como credenciais
+       credentials = ee.ServiceAccountCredentials(
+        service_account,
+        key_data=json.dumps(gee_credentials_dict)
+       )
+    
+    # Inicializar o Earth Engine com as credenciais
+       ee.Initialize(credentials)
+       st.success("Google Earth Engine inicializado com sucesso!")
+    except Exception as e:
+       st.error(f"Erro ao inicializar o Google Earth Engine: {e}")
 # Example of writing the dictionary to a file (if necessary)
     with open("service_account.json", "w") as f:
        json.dump(firebase_secrets_dict, f)
