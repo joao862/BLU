@@ -98,23 +98,6 @@ page = st.sidebar.selectbox("",pages)
 st.markdown(f"{custom_css}<h1 class='title-custom-style'>Real-Time Reservoir Monitoring Platform</h1>", unsafe_allow_html=True)
 st.markdown("<h2 class='subtitle-custom-style'>This software allows you to monitorize the volume storage of almost any water body at your choice. It is still in beta version.</h2>", unsafe_allow_html=True)
 
-import streamlit as st
-import json
-
-# Load the firebase credentials from the secrets file
-firebase_secrets = st.secrets["firebase"]["my_project_settings"]
-
-# Convert the string representation of the dictionary to an actual dictionary
-firebase_secrets_dict = json.loads(firebase_secrets.replace("=", ":"))
-
-# Now you can access individual fields
-client_email = firebase_secrets_dict["client_email"]
-private_key = firebase_secrets_dict["private_key"]
-
-# Example of writing the dictionary to a file (if necessary)
-with open("service_account.json", "w") as f:
-    json.dump(firebase_secrets_dict, f)
-
 # Function to process uploaded GeoJSON or KML file and return a GeoDataFrame
 def process_uploaded_file(data):
     _, file_extension = os.path.splitext(data.name)
@@ -182,6 +165,22 @@ if page == 'Home':
 	    
 elif page == "Worldwide Analysis":
     st.title("Worldwide Analysis")
+    import streamlit as st
+    import json
+
+# Load the firebase credentials from the secrets file
+   firebase_secrets = st.secrets["firebase"]["my_project_settings"]
+
+# Convert the string representation of the dictionary to an actual dictionary
+   firebase_secrets_dict = json.loads(firebase_secrets.replace("=", ":"))
+
+# Now you can access individual fields
+   client_email = firebase_secrets_dict["client_email"]
+   private_key = firebase_secrets_dict["private_key"]
+
+# Example of writing the dictionary to a file (if necessary)
+   with open("service_account.json", "w") as f:
+       json.dump(firebase_secrets_dict, f)
     # File uploader for GeoJSON or KML
     uploaded_file = st.file_uploader("Upload a GeoJSON or KML File")
 
