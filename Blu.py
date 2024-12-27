@@ -180,9 +180,6 @@ elif page == "Worldwide Analysis":
     import streamlit as st
 
     def get_auth():
-    # Service account email (this is your email associated with the service account)
-        service_account_email = 'blu-301@ee-joaopedromateusp.iam.gserviceaccount.com'
-
     # URL to the raw service account JSON file on GitHub
         file_url = "https://raw.githubusercontent.com/joao862/BLU/main/ee-joaopedromateusp-80c93814481c.json"
 
@@ -194,9 +191,9 @@ elif page == "Worldwide Analysis":
         # Parse the JSON content
             service_account_info = response.json()
 
-        # Use the downloaded JSON content to create credentials
+        # Create credentials from the JSON content (No need to specify service_account email separately)
             credentials = service_account.Credentials.from_service_account_info(
-               service_account_info, scopes=['https://www.googleapis.com/auth/earthengine.readonly']
+                service_account_info, scopes=['https://www.googleapis.com/auth/earthengine.readonly']
             )
 
         # Initialize Earth Engine with the credentials
@@ -207,10 +204,12 @@ elif page == "Worldwide Analysis":
 
         except requests.exceptions.RequestException as e:
             st.error(f"Error downloading the service account file: {e}")
+        except Exception as e:
+            st.error(f"Error initializing Earth Engine: {e}")
+            st.error(f"Details: {str(e)}")  # Log more detailed error message for debugging
 
     # Call the authentication function
     get_auth()
-
     # File uploader for GeoJSON or KML
     uploaded_file = st.file_uploader("Upload a GeoJSON or KML File")
 
