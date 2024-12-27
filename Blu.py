@@ -192,7 +192,6 @@ elif page == "Worldwide Analysis":
                try:
                    # Substitua os valores pelas credenciais corretas
                    service_account = 'blu-301@ee-joaopedromateusp.iam.gserviceaccount.com'
-		   st.write(firebase_config)
                    # Usando credenciais de conta de serviço
                    credentials = ee.ServiceAccountCredentials(service_account, firebase_config)
                    # Inicializa o cliente Earth Engine
