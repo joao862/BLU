@@ -65,6 +65,7 @@ custom_css = """
 """
 
 import streamlit as st
+import time
 from streamlit_navigation_bar import st_navbar
 
 pages = ["Home", "About", "Tutorial", "Worldwide Analysis", "Portugal Analysis"]
