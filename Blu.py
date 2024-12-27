@@ -179,7 +179,7 @@ elif page == "Worldwide Analysis":
         config_str = st.secrets["firebase"]["my_project_settings"]
     
     # Verifique se config_str é uma string antes de continuar
-       if isinstance(config_str, str):
+        if isinstance(config_str, str):
         # Substituir "=" por ":"
            config_str = config_str.replace("=", ":")
 
@@ -189,9 +189,9 @@ elif page == "Worldwide Analysis":
                st.write("Configuração Firebase:", firebase_config)
            except json.JSONDecodeError as e:
                st.error(f"Erro ao decodificar JSON: {e}")
-       else:
+        else:
            st.error("O valor de 'my_project_settings' não é uma string.")
-    else:
+     else:
         st.error("As chaves 'firebase' ou 'my_project_settings' não foram encontradas em st.secrets.")
 
     # File uploader for GeoJSON or KML
