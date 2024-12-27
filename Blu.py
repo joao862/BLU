@@ -174,7 +174,12 @@ elif page == "Worldwide Analysis":
     from google.oauth2 import service_account
     import ee
     import streamlit as st
-    geemap.ee_initialize()
+    service_account = 'blu-301@ee-joaopedromateusp.iam.gserviceaccount.com'
+    key_file = '/Users/joaopimenta/Downloads/ee-joaopedromateusp-80c93814481c.json'  # Path to your private key JSON file
+
+    # Authenticate and initialize
+    credentials = ee.ServiceAccountCredentials(service_account, key_file)
+    ee.Initialize(credentials)
     # File uploader for GeoJSON or KML
     uploaded_file = st.file_uploader("Upload a GeoJSON or KML File")
 
