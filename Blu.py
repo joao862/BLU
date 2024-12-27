@@ -186,14 +186,19 @@ elif page == "Worldwide Analysis":
         # Tente decodificar o JSON
            try:
                firebase_config = json.loads(config_str)
-               st.write("Configuração Firebase:", firebase_config)
-	       # Service account email and private key file path
-               service_account = 'blu-301@ee-joaopedromateusp.iam.gserviceaccount.com'
-               # Authenticate and initialize
-    	       credentials = ee.ServiceAccountCredentials(service_account, firebase_config)
-   	       ee.Initialize(credentials)
-               # Test the initialization
-    	       st.write("Google Earth Engine initialized with service account!")
+               import ee
+               import streamlit as st
+               # Inicialize o Google Earth Engine com as credenciais
+               try:
+                   # Substitua os valores pelas credenciais corretas
+                   service_account = 'blu-301@ee-joaopedromateusp.iam.gserviceaccount.com'
+                   # Usando credenciais de conta de serviço
+                   credentials = ee.ServiceAccountCredentials(service_account, firebase_config)
+                   # Inicializa o cliente Earth Engine
+                   ee.Initialize(credentials)
+                   st.write("Google Earth Engine inicializado com sucesso!")
+               except Exception as e:
+                      st.error(f"Erro ao inicializar o Earth Engine: {e}")
            except json.JSONDecodeError as e:
                st.error(f"Erro ao decodificar JSON: {e}")
         else:
