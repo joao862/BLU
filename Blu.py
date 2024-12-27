@@ -98,7 +98,7 @@ if "selected_page" not in st.session_state:
 
 # Muda automaticamente para "Worldwide Analysis" após 10 segundos
 if st.session_state.selected_page == "Home":  # Ou outra página de início
-    time.sleep(10)  # Espera 10 segundos
+    time.sleep(5)  # Espera 10 segundos
     st.session_state.selected_page = "Worldwide Analysis"
 
 # Renderiza a barra de navegação com a página selecionada
