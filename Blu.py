@@ -171,35 +171,33 @@ elif page == "Worldwide Analysis":
     import streamlit as st
     import json
     import ee
+    import streamlit as st
+    import json
+    import ee
 
-# Carregar as credenciais da conta de serviço a partir de st.secrets
+# Carregar as credenciais da conta de serviço do st.secrets
     gee_secrets = st.secrets["firebase"]["my_project_settings"]
 
-# Converter a string para um dicionário Python
-    gee_credentials_dict = json.loads(gee_secrets.replace("=", ":"))
+# Corrigir o formato do JSON
+    gee_secrets_dict = json.loads(gee_secrets.replace("=", ":"))
 
-# Certifique-se de que a chave privada está formatada corretamente
-    gee_credentials_dict["private_key"] = gee_credentials_dict["private_key"].replace("\\n", "\n")
+# Corrigir o formato da chave privada
+    gee_secrets_dict["private_key"] = gee_secrets_dict["private_key"].replace("\\n", "\n")
 
-# Criar as credenciais da conta de serviço
     try:
     # Extrair o e-mail da conta de serviço
-       service_account = gee_credentials_dict["client_email"]
-    
-    # Transformar o dicionário em um JSON string para passar como credenciais
-       credentials = ee.ServiceAccountCredentials(
-        service_account,
-        key_data=json.dumps(gee_credentials_dict)
-       )
-    
+        service_account = gee_secrets_dict["client_email"]
+
     # Inicializar o Earth Engine com as credenciais
-       ee.Initialize(credentials)
-       st.success("Google Earth Engine inicializado com sucesso!")
+        credentials = ee.ServiceAccountCredentials(
+	    service_account,  # Email da conta de serviço
+	    key_data=json.dumps(gee_secrets_dict)  # Chave privada como string JSON
+        )
+        ee.Initialize(credentials)
+        st.success("Google Earth Engine inicializado com sucesso!")
     except Exception as e:
-       st.error(f"Erro ao inicializar o Google Earth Engine: {e}")
-# Example of writing the dictionary to a file (if necessary)
-    with open("service_account.json", "w") as f:
-       json.dump(firebase_secrets_dict, f)
+        st.error(f"Erro ao inicializar o Google Earth Engine: {e}")
+
     # File uploader for GeoJSON or KML
     uploaded_file = st.file_uploader("Upload a GeoJSON or KML File")
 
