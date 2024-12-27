@@ -91,8 +91,8 @@ styles = {
         "background-color": "rgba(255, 255, 255, 0.95)",
     },
 }
-# Renderiza a barra de navegação com a página selecionada
-page = st_navbar(pages, styles=styles, default=st.session_state.selected_page)
+
+page = st_navbar(pages, styles=styles)
 # Apply the custom CSS style and HTML title using Markdown
 st.markdown(f"{custom_css}<h1 class='title-custom-style'>Real-Time Reservoir Monitoring Platform</h1>", unsafe_allow_html=True)
 st.markdown("<h2 class='subtitle-custom-style'>This software allows you to monitorize the volume storage of almost any water body at your choice. It is still in beta version.</h2>", unsafe_allow_html=True)
