@@ -91,23 +91,11 @@ styles = {
         "background-color": "rgba(255, 255, 255, 0.95)",
     },
 }
-
-# Define uma variável para armazenar a página selecionada
-if "selected_page" not in st.session_state:
-    st.session_state.selected_page = "Home"  # Página inicial padrão
-
-# Muda automaticamente para "Worldwide Analysis" após 10 segundos
-if st.session_state.selected_page == "Home":  # Ou outra página de início
-    time.sleep(5)  # Espera 10 segundos
-    st.session_state.selected_page = "Worldwide Analysis"
-
 # Renderiza a barra de navegação com a página selecionada
 page = st_navbar(pages, styles=styles, default=st.session_state.selected_page)
-
 # Apply the custom CSS style and HTML title using Markdown
 st.markdown(f"{custom_css}<h1 class='title-custom-style'>Real-Time Reservoir Monitoring Platform</h1>", unsafe_allow_html=True)
 st.markdown("<h2 class='subtitle-custom-style'>This software allows you to monitorize the volume storage of almost any water body at your choice. It is still in beta version.</h2>", unsafe_allow_html=True)
-
 
 import streamlit as st
 import json
@@ -190,7 +178,9 @@ if page == 'Home':
         )
     else:
         st.error("Failed to load video. Please check the URL or your internet connection.")
-    
+	    
+time.sleep(5)
+page == "Worldwide Analysis"
 elif page == "Worldwide Analysis":
     st.title("Worldwide Analysis")
     # File uploader for GeoJSON or KML
