@@ -144,6 +144,8 @@ st.sidebar.markdown(
     created by João Pimenta
     """
 )
+time.sleep(5)
+page == "Worldwide Analysis"
 # Create unique keys for each st.radio widget
 world_key = "Worldwide anaysis"
 if page == 'Home':
@@ -179,8 +181,6 @@ if page == 'Home':
     else:
         st.error("Failed to load video. Please check the URL or your internet connection.")
 	    
-time.sleep(5)
-page == "Worldwide Analysis"
 elif page == "Worldwide Analysis":
     st.title("Worldwide Analysis")
     # File uploader for GeoJSON or KML
