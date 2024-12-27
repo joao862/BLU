@@ -186,6 +186,7 @@ elif page == "Worldwide Analysis":
         # Tente decodificar o JSON
            try:
                firebase_config = json.loads(config_str)
+	       st.write(firebase_config)
                import ee
                import streamlit as st
                # Inicialize o Google Earth Engine com as credenciais
