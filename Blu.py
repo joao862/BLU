@@ -172,11 +172,13 @@ elif page == "Worldwide Analysis":
     import streamlit as st
     # Recupera configuração de secrets
     firebase_settings = st.secrets["firebase"]["my_project_settings"]
+    # Corrigir o formato do JSON substituindo "=" por ":"
+    config_str = config_str.replace("=", ":")
     st.write("What the hell is wrong here?")
-    st.write(firebase_settings)
+    st.write(config_str)
 # Tente converter para JSON
     try:
-        firebase_settings_json = json.loads(firebase_settings)
+        firebase_settings_json = json.loads(config_str)
         st.write("Firebase Config:", firebase_settings_json)
     except json.JSONDecodeError as e:
         st.error(f"Erro ao decodificar JSON: {e}")
