@@ -171,7 +171,7 @@ elif page == "Worldwide Analysis":
     import json
     import streamlit as st
     # Recupera configuração de secrets
-    firebase_settings = st.secrets["firebase"]["my_project"]
+    firebase_settings = st.secrets["firebase"]["my_project_settings"]
     st.write("What the hell is wrong here?")
     st.write(firebase_settings)
 # Tente converter para JSON
