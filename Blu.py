@@ -174,12 +174,43 @@ elif page == "Worldwide Analysis":
     from google.oauth2 import service_account
     import ee
     import streamlit as st
-    service_account = 'blu-301@ee-joaopedromateusp.iam.gserviceaccount.com'
-    key_file = 'https://github.com/joao862/BLU/blob/main/ee-joaopedromateusp-80c93814481c.json'  # Path to your private key JSON file
+    import requests
+    from google.oauth2 import service_account
+    import ee
+    import streamlit as st
 
-    # Authenticate and initialize
-    credentials = ee.ServiceAccountCredentials(service_account, key_file)
-    ee.Initialize(credentials)
+    def get_auth():
+    # Service account email (this is your email associated with the service account)
+        service_account_email = 'blu-301@ee-joaopedromateusp.iam.gserviceaccount.com'
+
+    # URL to the raw service account JSON file on GitHub
+        file_url = "https://raw.githubusercontent.com/joao862/BLU/main/ee-joaopedromateusp-80c93814481c.json"
+
+        try:
+        # Download the service account JSON file from GitHub
+            response = requests.get(file_url)
+            response.raise_for_status()  # Ensure the request was successful
+
+        # Parse the JSON content
+            service_account_info = response.json()
+
+        # Use the downloaded JSON content to create credentials
+            credentials = service_account.Credentials.from_service_account_info(
+               service_account_info, scopes=['https://www.googleapis.com/auth/earthengine.readonly']
+            )
+
+        # Initialize Earth Engine with the credentials
+            ee.Initialize(credentials)
+
+        # Return success message
+            st.write('Successfully synced to GEE')
+
+        except requests.exceptions.RequestException as e:
+            st.error(f"Error downloading the service account file: {e}")
+
+# Call the authentication function
+get_auth()
+
     # File uploader for GeoJSON or KML
     uploaded_file = st.file_uploader("Upload a GeoJSON or KML File")
 
