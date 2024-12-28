@@ -178,24 +178,7 @@ elif page == "Worldwide Analysis":
 
 # Access the Streamlit secret containing the TOML-like service account info
     service_account_info = st.secrets
-
-# Parse the Streamlit secret string into a dictionary
-    service_account_info_dict = json.dumps(service_account_info, indent=4)
-
-# Create a temporary JSON file with the credentials
-    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as temp_json_file:
-        json.dump(service_account_info_dict, temp_json_file, indent=4)
-        temp_json_path = temp_json_file.name
-
-# Authenticate with Google Earth Engine
-    service_account_email = service_account_info_dict["client_email"]
-
-    try:
-        credentials = ee.ServiceAccountCredentials(service_account_email, temp_json_path)
-        ee.Initialize(credentials)
-        st.success("Authenticated and initialized successfully with Google Earth Engine!")
-    except Exception as e:
-        st.error(f"Error authenticating with Google Earth Engine: {e}")
+    st.write(service_account_info)
 
     # File uploader for GeoJSON or KML
     uploaded_file = st.file_uploader("Upload a GeoJSON or KML File")
