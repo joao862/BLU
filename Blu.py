@@ -168,28 +168,26 @@ elif page == "Worldwide Analysis":
     st.title("Worldwide Analysis")
     import toml
     import json
-    import streamlit as st
 
     st.write("What the hell is wrong here?")
     from google.oauth2 import service_account
     import ee
     import streamlit as st
     import requests
-    import json
     import tempfile
-    import ee
-    import streamlit as st
-
-    # Acessar os segredos diretamente
+# Acessar os segredos diretamente
     service_account_info = st.secrets["my_project_settings"]
 
-    # Criar um arquivo JSON temporário com as credenciais
+# Converter a string JSON para um dicionário Python
+    service_account_info_dict = json.loads(service_account_info)
+
+# Criar um arquivo JSON temporário com as credenciais
     with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as temp_json_file:
-        json.dump(service_account_info, temp_json_file)
+        json.dump(service_account_info_dict, temp_json_file)
         temp_json_path = temp_json_file.name
 
-   # Autenticar no Google Earth Engine
-    service_account_email = service_account_info["client_email"]
+# Autenticar no Google Earth Engine
+    service_account_email = service_account_info_dict["client_email"]
 
     try:
         credentials = ee.ServiceAccountCredentials(service_account_email, temp_json_path)
