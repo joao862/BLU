@@ -178,12 +178,16 @@ elif page == "Worldwide Analysis":
 
     # Access the Streamlit secret containing the TOML-like service account info
     service_account_info = st.secrets
-    # Convert the Streamlit secrets to a JSON string
-    service_account_info_json = json.dumps(service_account_info, indent=4)
+    # Convert the Streamlit secrets to a regular dictionary
+    service_account_info_dict = dict(service_account_info)
+
+    # Convert the dictionary to a JSON string
+    service_account_info_json = json.dumps(service_account_info_dict, indent=4)
 
     # Display the JSON string in the app
     st.write("Service Account Info (JSON):")
     st.code(service_account_info_json, language="json")
+
     # File uploader for GeoJSON or KML
     uploaded_file = st.file_uploader("Upload a GeoJSON or KML File")
 
