@@ -204,10 +204,6 @@ elif page == "Worldwide Analysis":
         except Exception as cleanup_error:
             st.warning(f"Could not delete temporary file: {cleanup_error}")
 
-    # Display the JSON string in the app
-    st.write("Service Account Info (JSON):")
-    st.code(service_account_info_json, language="json")
-
     # File uploader for GeoJSON or KML
     uploaded_file = st.file_uploader("Upload a GeoJSON or KML File")
 
