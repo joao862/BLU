@@ -184,11 +184,13 @@ elif page == "Worldwide Analysis":
     if isinstance(service_account_info, str):  # Verificar se é uma string
         try:
             service_account_info_dict = json.loads(service_account_info)  # Tentar converter para dicionário
+	    st.write(service_account_info_dict)
         except json.JSONDecodeError as e:
             st.error(f"Erro ao decodificar o JSON: {e}")
             st.stop()
     elif isinstance(service_account_info, dict):  # Já é um dicionário
         service_account_info_dict = service_account_info
+	st.write(service_account_info_dict)
     else:
         st.error("Formato inesperado em my_project_settings.")
         st.stop()
@@ -200,6 +202,7 @@ elif page == "Worldwide Analysis":
 
 # Autenticar no Google Earth Engine
     service_account_email = service_account_info_dict["client_email"]
+    st.write(service_account_email)
 
     try:
         credentials = ee.ServiceAccountCredentials(service_account_email, temp_json_path)
