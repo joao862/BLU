@@ -171,15 +171,14 @@ elif page == "Worldwide Analysis":
 
     st.write("What the hell is wrong here?")
     from google.oauth2 import service_account
+    import json
+    import tempfile
     import ee
     import streamlit as st
-    import tempfile
-    import json
 
-    # Access the Streamlit secret containing the TOML-like service account info
-    service_account_info = st.secrets
-    # Convert the Streamlit secrets to a regular dictionary
-    service_account_info_dict = dict(service_account_info)
+    # Access the Streamlit secrets and convert to a dictionary
+    service_account_info = dict(st.secrets)
+
     # Create a temporary file to store the JSON credentials
     try:
         with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as temp_json_file:
@@ -187,7 +186,7 @@ elif page == "Worldwide Analysis":
             json.dump(service_account_info, temp_json_file, indent=4)
             temp_json_path = temp_json_file.name
 
-    # Authenticate with Google Earth Engine using the temporary JSON file
+        # Authenticate with Google Earth Engine using the temporary JSON file
         service_account_email = service_account_info["client_email"]
         credentials = ee.ServiceAccountCredentials(service_account_email, temp_json_path)
         ee.Initialize(credentials)
@@ -197,6 +196,14 @@ elif page == "Worldwide Analysis":
         st.error(f"Missing required field in service account info: {e}")
     except Exception as e:
         st.error(f"Error authenticating with Google Earth Engine: {e}")
+    finally:
+        # Optionally clean up the temporary file after initialization
+        try:
+            import os
+            os.remove(temp_json_path)
+        except Exception as cleanup_error:
+            st.warning(f"Could not delete temporary file: {cleanup_error}")
+
     # Display the JSON string in the app
     st.write("Service Account Info (JSON):")
     st.code(service_account_info_json, language="json")
