@@ -177,7 +177,7 @@ elif page == "Worldwide Analysis":
     import json
 
 # Access the Streamlit secret containing the TOML-like service account info
-    service_account_info = st.secrets["service_account_info"]
+    service_account_info = st.secrets
 
 # Parse the Streamlit secret string into a dictionary
     service_account_info_dict = {
