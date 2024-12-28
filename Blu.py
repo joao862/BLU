@@ -172,34 +172,33 @@ elif page == "Worldwide Analysis":
     st.write("What the hell is wrong here?")
     from google.oauth2 import service_account
     import ee
-    import json
-    import tempfile
-    import ee
     import streamlit as st
+    import tempfile
+    import json
 
-    # Acessar os segredos diretamente
-    service_account_info = st.secrets
-    st.write(service_account_info)
+# Access the Streamlit secret containing the TOML-like service account info
+    service_account_info = st.secrets["service_account_info"]
 
-    # Parse TOML string
-    toml_data = toml.loads(service_account_info)
+# Parse the Streamlit secret string into a dictionary
+    service_account_info_dict = {
+        key.strip(): value.strip().strip('"""') if key.strip() == "private_key" else value.strip()
+        for key, value in (line.split("=", 1) for line in service_account_info.split("\n") if "=" in line)
+    }
 
-    # Convert to JSON
-    service_account_info_dict = json.dumps(toml_data, indent=4)
-    # Criar um arquivo JSON temporário com as credenciais
+# Create a temporary JSON file with the credentials
     with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as temp_json_file:
-        json.dump(service_account_info_dict, temp_json_file)
+        json.dump(service_account_info_dict, temp_json_file, indent=4)
         temp_json_path = temp_json_file.name
 
-    # Autenticar no Google Earth Engine
+# Authenticate with Google Earth Engine
     service_account_email = service_account_info_dict["client_email"]
 
     try:
         credentials = ee.ServiceAccountCredentials(service_account_email, temp_json_path)
         ee.Initialize(credentials)
-        st.success("Autenticado e inicializado com sucesso no Google Earth Engine!")
+        st.success("Authenticated and initialized successfully with Google Earth Engine!")
     except Exception as e:
-        st.error(f"Erro ao autenticar no Google Earth Engine: {e}")
+        st.error(f"Error authenticating with Google Earth Engine: {e}")
 
     # File uploader for GeoJSON or KML
     uploaded_file = st.file_uploader("Upload a GeoJSON or KML File")
