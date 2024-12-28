@@ -180,11 +180,12 @@ elif page == "Worldwide Analysis":
 # Acessar os segredos diretamente
     service_account_info = st.secrets["my_project_settings"]
 
-# Verificar o tipo de service_account_info e converter se necessário
+# Verificar o tipo e corrigir o JSON, se necessário
     if isinstance(service_account_info, str):  # Verificar se é uma string
         try:
-            service_account_info_dict = json.loads(service_account_info)  # Tentar converter para dicionário
-            st.write(service_account_info_dict)
+        # Substituir quebras de linha na chave "private_key" para JSON válido
+            corrected_info = service_account_info.replace("\n", "\\n")
+            service_account_info_dict = json.loads(corrected_info)  # Tentar converter para dicionário
         except json.JSONDecodeError as e:
             st.error(f"Erro ao decodificar o JSON: {e}")
             st.stop()
@@ -201,7 +202,6 @@ elif page == "Worldwide Analysis":
 
 # Autenticar no Google Earth Engine
     service_account_email = service_account_info_dict["client_email"]
-    st.write(service_account_email)
 
     try:
         credentials = ee.ServiceAccountCredentials(service_account_email, temp_json_path)
@@ -209,7 +209,6 @@ elif page == "Worldwide Analysis":
         st.success("Autenticado e inicializado com sucesso no Google Earth Engine!")
     except Exception as e:
         st.error(f"Erro ao autenticar no Google Earth Engine: {e}")
-
 
     # File uploader for GeoJSON or KML
     uploaded_file = st.file_uploader("Upload a GeoJSON or KML File")
