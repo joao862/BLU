@@ -175,12 +175,29 @@ elif page == "Worldwide Analysis":
     import ee
     import streamlit as st
     import requests
-    from google.oauth2 import service_account
+    import json
+    import tempfile
     import ee
     import streamlit as st
 
-    ee.Authenticate()
-    ee.Initialize()
+    # Acessar os segredos diretamente
+    service_account_info = st.secrets["my_project_settings"]
+
+    # Criar um arquivo JSON temporário com as credenciais
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as temp_json_file:
+        json.dump(service_account_info, temp_json_file)
+        temp_json_path = temp_json_file.name
+
+   # Autenticar no Google Earth Engine
+    service_account_email = service_account_info["client_email"]
+
+    try:
+        credentials = ee.ServiceAccountCredentials(service_account_email, temp_json_path)
+        ee.Initialize(credentials)
+        st.success("Autenticado e inicializado com sucesso no Google Earth Engine!")
+    except Exception as e:
+        st.error(f"Erro ao autenticar no Google Earth Engine: {e}")
+
     # File uploader for GeoJSON or KML
     uploaded_file = st.file_uploader("Upload a GeoJSON or KML File")
 
