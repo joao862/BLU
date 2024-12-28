@@ -179,7 +179,7 @@ elif page == "Worldwide Analysis":
 
 # Acessar os segredos diretamente
     service_account_info = st.secrets["my_project_settings"]
-    st.write(service_account_info)
+    #st.write(service_account_info)
 # Verificar o tipo e corrigir o JSON, se necessário
     if isinstance(service_account_info, str):  # Verificar se é uma string
         try:
