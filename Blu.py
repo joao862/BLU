@@ -179,13 +179,14 @@ elif page == "Worldwide Analysis":
 
 # Acessar os segredos diretamente
     service_account_info = st.secrets["my_project_settings"]
-
+    st.write(service_account_info)
 # Verificar o tipo e corrigir o JSON, se necessário
     if isinstance(service_account_info, str):  # Verificar se é uma string
         try:
         # Substituir quebras de linha na chave "private_key" para JSON válido
             corrected_info = service_account_info.replace("\n", "\\n")
             service_account_info_dict = json.loads(corrected_info)  # Tentar converter para dicionário
+            st.write(service_account_info_dict)
         except json.JSONDecodeError as e:
             st.error(f"Erro ao decodificar o JSON: {e}")
             st.stop()
