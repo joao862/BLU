@@ -180,10 +180,7 @@ elif page == "Worldwide Analysis":
     service_account_info = st.secrets
 
 # Parse the Streamlit secret string into a dictionary
-    service_account_info_dict = {
-        key.strip(): value.strip().strip('"""') if key.strip() == "private_key" else value.strip()
-        for key, value in (line.split("=", 1) for line in service_account_info.split("\n") if "=" in line)
-    }
+    service_account_info_dict = json.dumps(service_account_info, indent=4)
 
 # Create a temporary JSON file with the credentials
     with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as temp_json_file:
