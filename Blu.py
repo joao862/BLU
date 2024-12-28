@@ -177,31 +177,21 @@ elif page == "Worldwide Analysis":
     import ee
     import streamlit as st
 
-# Acessar os segredos diretamente
-    service_account_info = st.secrets["my_project_settings"]
-    #st.write(service_account_info)
-# Verificar o tipo e corrigir o JSON, se necessário
-    if isinstance(service_account_info, str):  # Verificar se é uma string
-        try:
-        # Substituir quebras de linha na chave "private_key" para JSON válido
-            corrected_info = service_account_info.replace("\n", "\\n")
-            service_account_info_dict = json.loads(corrected_info)  # Tentar converter para dicionário
-            st.write(service_account_info_dict)
-        except json.JSONDecodeError as e:
-            st.error(f"Erro ao decodificar o JSON: {e}")
-            st.stop()
-    elif isinstance(service_account_info, dict):  # Já é um dicionário
-        service_account_info_dict = service_account_info
-    else:
-        st.error("Formato inesperado em my_project_settings.")
-        st.stop()
+    # Acessar os segredos diretamente
+    service_account_info = st.secrets
+    st.write(service_account_info)
 
-# Criar um arquivo JSON temporário com as credenciais
+    # Parse TOML string
+    toml_data = toml.loads(service_account_info)
+
+    # Convert to JSON
+    service_account_info_dict = json.dumps(toml_data, indent=4)
+    # Criar um arquivo JSON temporário com as credenciais
     with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as temp_json_file:
         json.dump(service_account_info_dict, temp_json_file)
         temp_json_path = temp_json_file.name
 
-# Autenticar no Google Earth Engine
+    # Autenticar no Google Earth Engine
     service_account_email = service_account_info_dict["client_email"]
 
     try:
