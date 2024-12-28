@@ -197,14 +197,6 @@ elif page == "Worldwide Analysis":
         st.error(f"Missing required field in service account info: {e}")
     except Exception as e:
         st.error(f"Error authenticating with Google Earth Engine: {e}")
-    finally:
-    # Optionally clean up the temporary file after initialization
-    try:
-        import os
-        os.remove(temp_json_path)
-    except Exception as cleanup_error:
-        st.warning(f"Could not delete temporary file: {cleanup_error}")
-
     # Display the JSON string in the app
     st.write("Service Account Info (JSON):")
     st.code(service_account_info_json, language="json")
