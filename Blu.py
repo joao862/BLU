@@ -190,7 +190,6 @@ elif page == "Worldwide Analysis":
             st.stop()
     elif isinstance(service_account_info, dict):  # Já é um dicionário
         service_account_info_dict = service_account_info
-	st.write(service_account_info_dict)
     else:
         st.error("Formato inesperado em my_project_settings.")
         st.stop()
