@@ -184,7 +184,7 @@ elif page == "Worldwide Analysis":
     if isinstance(service_account_info, str):  # Verificar se é uma string
         try:
             service_account_info_dict = json.loads(service_account_info)  # Tentar converter para dicionário
-	    st.write(service_account_info_dict)
+            st.write(service_account_info_dict)
         except json.JSONDecodeError as e:
             st.error(f"Erro ao decodificar o JSON: {e}")
             st.stop()
