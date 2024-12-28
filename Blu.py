@@ -172,14 +172,26 @@ elif page == "Worldwide Analysis":
     st.write("What the hell is wrong here?")
     from google.oauth2 import service_account
     import ee
-    import streamlit as st
-    import requests
+    import json
     import tempfile
+    import ee
+    import streamlit as st
+
 # Acessar os segredos diretamente
     service_account_info = st.secrets["my_project_settings"]
 
-# Converter a string JSON para um dicionário Python
-    service_account_info_dict = json.loads(service_account_info)
+# Verificar o tipo de service_account_info e converter se necessário
+    if isinstance(service_account_info, str):  # Verificar se é uma string
+        try:
+            service_account_info_dict = json.loads(service_account_info)  # Tentar converter para dicionário
+        except json.JSONDecodeError as e:
+            st.error(f"Erro ao decodificar o JSON: {e}")
+            st.stop()
+    elif isinstance(service_account_info, dict):  # Já é um dicionário
+        service_account_info_dict = service_account_info
+    else:
+        st.error("Formato inesperado em my_project_settings.")
+        st.stop()
 
 # Criar um arquivo JSON temporário com as credenciais
     with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as temp_json_file:
@@ -195,6 +207,7 @@ elif page == "Worldwide Analysis":
         st.success("Autenticado e inicializado com sucesso no Google Earth Engine!")
     except Exception as e:
         st.error(f"Erro ao autenticar no Google Earth Engine: {e}")
+
 
     # File uploader for GeoJSON or KML
     uploaded_file = st.file_uploader("Upload a GeoJSON or KML File")
