@@ -9,6 +9,15 @@ To address these challenges, this research and app introduces a novel remote sen
 
 Key results from testing on reservoirs in Portugal and California, USA, demonstrated an average mean absolute percentage error of **5.35%** and an average correlation coefficient (**R²**) of **0.90**, showcasing the tool's reliability compared to traditional methods.
 
+## Why It Matters
+Reservoirs are essential for water security, agriculture, hydroelectric power, and ecological balance. Many regions, however, lack efficient monitoring tools, leading to mismanagement and increased risks of droughts, floods, and ecological disruption. This application bridges the gap by offering a globally accessible solution that requires no physical infrastructure. 
+
+## Key Benefits
+- **Automated Image Processing:** Reduces manual effort using advanced algorithms for water surface detection and volume calculation.
+- **Accurate Data Insights:** Achieves a mean absolute percentage error of just **5.35%**.
+- **Global Scalability:** Monitors reservoirs of all sizes, even in remote areas.
+- **Environmental Sustainability:** Supports efficient water use and resource management.
+
 ## About This Application
 The **Reservoir Volume Monitoring Application** is a cutting-edge solution designed to tackle global challenges in water management, flood and droughts prevention. The app is fully written in python levaraging the Streamlit framework and the the use of the Google Earth Engine API, (https://earthengine.google.com) to obtain geoespatial data imagery and to perform the cloud operations. The app uses several databases such as the SWOT  lakes database(https://catalogue.theia.data-terra.org/meta/SWOT_PRIOR_LAKE_DATABASE) to highlight the polygons of the reservoirs on the map and to use their relative data for the analysis. Also, it uses unsupervised learning to classify the water pixels in the sattelite images and deep learning algorithms to identify and extract unwanted elements such as clouds. Finally, the key component to obtaining  the volume of the resvervoir is the storage capacity curve, AKA A-V curve, which can be either from the current databases, inputted by the user.
 
@@ -25,17 +34,6 @@ This application simplifies complex workflows into an intuitive and automated pr
 
 The results are visualized through dynamic charts, maps, and downloadable reports, providing actionable insights.
 The app contains a tab called 'Tutorial' whith more detailed explanation and a video representing an example of use.
-
-## Why It Matters
-Reservoirs are essential for water security, agriculture, hydroelectric power, and ecological balance. Many regions, however, lack efficient monitoring tools, leading to mismanagement and increased risks of droughts, floods, and ecological disruption. This application bridges the gap by offering a globally accessible solution that requires no physical infrastructure. 
-
-With an accuracy of **94.65%**, tested on reservoirs in Portugal and California, the app provides reliable data to support decision-making in water management, flood risk mitigation, and ecosystem preservation.
-
-## Key Benefits
-- **Automated Image Processing:** Reduces manual effort using advanced algorithms for water surface detection and volume calculation.
-- **Accurate Data Insights:** Achieves a mean absolute percentage error of just **5.35%**.
-- **Global Scalability:** Monitors reservoirs of all sizes, even in remote areas.
-- **Environmental Sustainability:** Supports efficient water use and resource management.
 
 ## The Future of Reservoir Monitoring
 Future enhancements include:
