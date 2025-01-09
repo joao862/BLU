@@ -53,7 +53,7 @@ If you have any questions or want to collaborate, feel free to reach out:
 - **GitHub:** [github.com/yourusername](https://github.com/yourusername)
 - **LinkedIn:** [www.linkedin.com/in/joão-pimenta-mp](https://www.linkedin.com/in/jo%C3%A3o-pimenta-mp)
 
-                        ---
+                      
 Conclusion
 By following these steps, you can efficiently analyze satellite imagery and calculate reservoir volumes using the app. The methodology ensures accurate results with cloud coverage filtering, error checking, and reliable bathymetric analysis.
 If you encounter any issues or need further assistance, refer to the help section within the app or contact support.
