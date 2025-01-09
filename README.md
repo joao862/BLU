@@ -1,65 +1,58 @@
 # BLU
 Blu is a reservoirs monitoring platform built with Streamlit framework to allow calculate the volume of reservoirs worldwide using remote sensing
 
+## About the Research
+Efficient management of water reservoirs is critical for water security, flood control, and hydroelectric power generation. Traditional methods for evaluating reservoir volumes rely on in-situ measurements and physical surveys, which are often time-consuming, resource-intensive, and impractical for many regions due to financial and logistical limitations.
 
+To address these challenges, this research introduces a novel remote sensing tool that provides an accurate, scalable, and globally accessible method for reservoir volume evaluation. By integrating high-resolution Sentinel-2 satellite imagery with geospatial analysis techniques and machine learning algorithms, the tool automatically calculates inundated areas and reservoir water storage. 
 
-Tutorial: Analyzing Satellite Imagery and Calculating Reservoir Volumes
-                        
-Welcome to the tutorial for your app, which automates the process of analyzing satellite imagery and calculating the area and volume of reservoirs. This guide will walk you through the steps to use the app effectively.    
-                        ---
- Step 1: Define the Region of Interest (ROI)
- 1. **Set the Region of Interest (ROI)**  
- Start by defining the Region of Interest (ROI), which is the geographic area you want to analyze. You can specify this by selecting coordinates or using a map interface to draw a boundary around the reservoir.  
- **Tip:** You can zoom in and adjust the shape of the ROI for more precise selection.
-                        ---
- Step 2: Define the Date Range
- 1. **Select the Date Range**  
-The next step is to choose a date range for the analysis. You can use the calendar interface within the app to select the start and end dates for the period you wish to analyze.  
-The app will automatically filter available satellite imagery based on the selected date range and cloud coverage.
+Key results from testing on reservoirs in Portugal and California, USA, demonstrated an average mean absolute percentage error of **5.35%** and an average correlation coefficient (**R²**) of **0.90**, showcasing the tool's reliability compared to traditional methods.
 
- Cloud Coverage Percentage Filter:  
-The app will display images for the chosen date range and allow you to choose the maximum acceptable percentage of cloud coverage for the images.  
-**Tip:** To ensure clear images, select a lower cloud coverage threshold (e.g., less than 10%).
-                        ---
-Step 3: Confirm the Reservoir Selection
-1. **Select the Reservoir**  
-After defining the ROI and setting the date range, the app will retrieve satellite imagery for the region. You will be shown a list of possible reservoirs within the selected area.  
- Review the options and confirm the specific reservoir you want to analyze.  
-  **Tip:** If the app detects multiple water bodies, it will present thumbnails or maps to help you identify the correct reservoir.  
-                        ---
-Step 4: Choose the Cloud Coverage Percentage
-1. **Choose Cloud Coverage Threshold**  
-You will now select the cloud coverage threshold. The app will show you images with varying levels of cloud coverage.  
-ou can choose a cloud coverage percentage that meets your needs (e.g., less than 10%, 20%, etc.).  
-**Tip:** For more accurate results, choose a threshold that minimizes the impact of cloud cover on your analysis.
-                        ---
-Step 5: Choose the Output Variables
-     1. **Select Output Variables**  
-        Now, you can choose the specific variables you want the app to calculate for the reservoir. These may include:
-         - Water Area
-           - Volume
-           - Time Series Data for Volume
-           - Bathymetric Information  
-      **Tip:** Select the variables you are most interested in, such as volume or changes over time.                  
-                        ---
+## About This Application
+The **Reservoir Volume Monitoring Application** is a cutting-edge solution designed to tackle global challenges in water management, flood prevention, and hydroelectric power optimization. By leveraging Sentinel-2 satellite imagery and advanced geospatial analysis, the app automates the estimation of reservoir volumes, offering accurate, efficient, and globally scalable solutions.
 
-Step 6: Press the "Start" Button   
-      1. **Start the Analysis** 
-      Once all parameters have been defined (date range, reservoir selection, cloud coverage, and output variables), you can initiate the analysis       by pressing the **"Start"** button.  
-      The app will begin processing the satellite imagery, applying necessary corrections, and performing calculations to estimate the reservoir's water area and volume.  
-       **Tip:** Depending on the data size, the process may take a few minutes. You’ll see a progress indicator during this time.
-                        ---
-Step 7: View and Export Results
-      1. **View Results**  
-      Once the analysis is complete, you can view the results directly within the app. The app will display visualizations of the water area and         provide calculated volume data for the reservoir.
-      2. **Export Data**  
-      You can export the analysis results in CSV, Excel, or other formats for further analysis or reporting. Simply click the "Export" button to download the data.
-                        ---
-Notes
-1. **Fill the parameters**
-In order for the software to compute the water analysis all the paremeters must have been adressed
-2. **Statistics**  
-Note that 'higher percentage' and 'lower percentage' values are calulated based on the maxiumum and minum water volume value from the calculated time series comparing with the maximum water volume present on the SWOT lakes database for that specific reservoir
+This software includes a free demo version for users to test the tool. It currently uses a sample of polygons from the SWOT lakes database, covering 93% of lakes across Europe. Future updates will expand the database, improve performance, and optimize memory usage.
+
+## How It Works
+This application simplifies complex workflows into an intuitive and automated process:
+1. **Select a Region of Interest (ROI):** Choose using an interactive map or upload geojson files.
+2. **Retrieve Satellite Imagery:** Automatically fetch Sentinel-2 data for the specified area and date range.
+3. **Preprocess Data:** Remove interferences like clouds, shadows, or structural obstacles such as bridges.
+4. **Classify Water Pixels:** Use indices like NDWI (Normalized Difference Water Index) to classify water pixels and calculate inundated areas.
+5. **Reconstruct Water Surfaces:** For cloud-covered reservoirs, use bathymetric data from global databases like GLOBathy.
+6. **Calculate Volumes:** Derive area-volume relationships from databases or user-provided data.
+
+The results are visualized through dynamic charts, maps, and downloadable reports, providing actionable insights.
+
+## Why It Matters
+Reservoirs are essential for water security, agriculture, hydroelectric power, and ecological balance. Many regions, however, lack efficient monitoring tools, leading to mismanagement and increased risks of droughts, floods, and ecological disruption. This application bridges the gap by offering a globally accessible solution that requires no physical infrastructure. 
+
+With an accuracy of **94.65%**, tested on reservoirs in Portugal and California, the app provides reliable data to support decision-making in water management, flood risk mitigation, and ecosystem preservation.
+
+## Key Benefits
+- **Automated Image Processing:** Reduces manual effort using advanced algorithms for water surface detection and volume calculation.
+- **Accurate Data Insights:** Achieves a mean absolute percentage error of just **5.35%**.
+- **Global Scalability:** Monitors reservoirs of all sizes, even in remote areas.
+- **Environmental Sustainability:** Supports efficient water use and resource management.
+
+## The Future of Reservoir Monitoring
+Future enhancements include:
+- Integration with new satellite missions like **SWOT** (Surface Water and Ocean Topography).
+- Predictive modeling using **LSTM** algorithms to forecast reservoir volumes under varying climate scenarios.
+- Expanded compatibility with emerging geospatial technologies.
+
+With its scalable and adaptable design, this tool aims to become an indispensable resource for water resource management professionals, researchers, and environmental advocates.
+
+## Workflow Overview
+![Workflow of the app: From data acquisition to volume estimation](workflow_diagram.png)
+
+## Contact Me
+If you have any questions or want to collaborate, feel free to reach out:
+
+- **Email:** [joaopedromateusp@gmail.com](mailto:joaopedromateusp@gmail.com)
+- **GitHub:** [github.com/yourusername](https://github.com/yourusername)
+- **LinkedIn:** [www.linkedin.com/in/joão-pimenta-mp](https://www.linkedin.com/in/jo%C3%A3o-pimenta-mp)
+
                         ---
 Conclusion
 By following these steps, you can efficiently analyze satellite imagery and calculate reservoir volumes using the app. The methodology ensures accurate results with cloud coverage filtering, error checking, and reliable bathymetric analysis.
