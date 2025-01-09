@@ -50,7 +50,6 @@ With its scalable and adaptable design, this tool aims to become an indispensabl
 If you have any questions or want to collaborate, feel free to reach out:
 
 - **Email:** [joaopedromateusp@gmail.com](mailto:joaopedromateusp@gmail.com)
-- **GitHub:** [github.com/yourusername](https://github.com/yourusername)
 - **LinkedIn:** [www.linkedin.com/in/joão-pimenta-mp](https://www.linkedin.com/in/jo%C3%A3o-pimenta-mp)
 
                       
