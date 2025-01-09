@@ -44,7 +44,7 @@ Future enhancements include:
 With its scalable and adaptable design, this tool aims to become an indispensable resource for water resource management professionals, researchers, and environmental advocates.
 
 ## Workflow Overview
-![Workflow of the app: From data acquisition to volume estimation](https://github.com/joao862/BLU/blob/main/Captura de ecrã 2024-09-24, às 00.51.49.png)
+![Workflow of the app: From data acquisition to volume estimation](https://github.com/joao862/BLU/blob/main/workflow.png)
 
 ## Contact Me
 If you have any questions or want to collaborate, feel free to reach out:
