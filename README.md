@@ -1,6 +1,6 @@
 # BLU
 Blu is a reservoirs monitoring platform built with Streamlit framework to allow calculate the volume of reservoirs worldwide using remote sensing
-![Workflow of the app: From data acquisition to volume estimation](https://github.com/joao862/BLU/blob/main/workflow.png)
+![Workflow of the app: From data acquisition to volume estimation](https://github.com/joao862/BLU/blob/main/app.png)
 
 ## About the Research
 Efficient management of water reservoirs is critical for water security, flood control, and hydroelectric power generation. Traditional methods for evaluating reservoir volumes rely on in-situ measurements and physical surveys, which are often time-consuming, resource-intensive, and impractical for many regions due to financial and logistical limitations.
