@@ -21,7 +21,10 @@ Reservoirs are essential for water security, agriculture, hydroelectric power, a
 ## About This Application
 The **Reservoir Volume Monitoring Application** is a cutting-edge solution designed to tackle global challenges in water management, flood and droughts prevention. The app is fully written in python levaraging the Streamlit framework and the the use of the Google Earth Engine API, (https://earthengine.google.com) to obtain geoespatial data imagery and to perform the cloud operations. The app uses several databases such as the SWOT  lakes database(https://catalogue.theia.data-terra.org/meta/SWOT_PRIOR_LAKE_DATABASE) to highlight the polygons of the reservoirs on the map and to use their relative data for the analysis. Also, it uses unsupervised learning to classify the water pixels in the sattelite images and deep learning algorithms to identify and extract unwanted elements such as clouds. Finally, the key component to obtaining  the volume of the resvervoir is the storage capacity curve, AKA A-V curve, which can be either from the current databases, inputted by the user.
 
-This software includes a free demo version for users to test the tool. It currently uses the Hydrolakes databases instead of the SWOT lakes database due to the server memory constraints. here you can check out the app: https://huggingface.co/spaces/joaopimenta/BLU_Platform?logs=container, Future updates will expand the database, improve performance, optimize memory usage and other features,stay tuned!
+This software includes a free demo version for users to test the tool. It currently uses the Hydrolakes databases instead of the SWOT lakes database due to the server memory constraints. here you can check out the demo version of the app: 
+https://huggingface.co/spaces/joaopimenta/BLU_Platform?logs=container
+
+Future updates will expand the database, improve performance, optimize memory usage and other features,stay tuned!
 
 ## How It Works
 This application simplifies complex workflows into an intuitive and automated process:
