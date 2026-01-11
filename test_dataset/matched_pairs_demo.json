@@ -1,0 +1,91 @@
+{
+  "source": "Microsoft Planetary Computer (DEMO)",
+  "bbox": [
+    -122.5,
+    37.5,
+    -122.0,
+    38.0
+  ],
+  "start_date": "2023-06-01",
+  "end_date": "2023-06-30",
+  "cloud_percentage_threshold": 5.0,
+  "max_time_diff_days": 3,
+  "orbit_direction": null,
+  "total_s1_images": 15,
+  "total_s2_images": 12,
+  "matched_pairs_count": 8,
+  "matched_pairs": [
+    {
+      "s1_id": "S1A_IW_GRDH_1SDV_20230605T000000",
+      "s1_date": "2023-06-05",
+      "s1_orbit": "ascending",
+      "s2_id": "S2B_MSIL2A_20230605T000000",
+      "s2_date": "2023-06-05",
+      "s2_cloud_cover": 4.25,
+      "time_diff_days": 0.56
+    },
+    {
+      "s1_id": "S1A_IW_GRDH_1SDV_20230608T000000",
+      "s1_date": "2023-06-08",
+      "s1_orbit": "ascending",
+      "s2_id": "S2B_MSIL2A_20230608T000000",
+      "s2_date": "2023-06-08",
+      "s2_cloud_cover": 1.49,
+      "time_diff_days": 0.06
+    },
+    {
+      "s1_id": "S1A_IW_GRDH_1SDV_20230612T000000",
+      "s1_date": "2023-06-12",
+      "s1_orbit": "descending",
+      "s2_id": "S2B_MSIL2A_20230611T000000",
+      "s2_date": "2023-06-11",
+      "s2_cloud_cover": 2.38,
+      "time_diff_days": 1.02
+    },
+    {
+      "s1_id": "S1A_IW_GRDH_1SDV_20230614T000000",
+      "s1_date": "2023-06-14",
+      "s1_orbit": "descending",
+      "s2_id": "S2B_MSIL2A_20230614T000000",
+      "s2_date": "2023-06-14",
+      "s2_cloud_cover": 2.15,
+      "time_diff_days": 0.02
+    },
+    {
+      "s1_id": "S1A_IW_GRDH_1SDV_20230620T000000",
+      "s1_date": "2023-06-20",
+      "s1_orbit": "descending",
+      "s2_id": "S2B_MSIL2A_20230617T000000",
+      "s2_date": "2023-06-17",
+      "s2_cloud_cover": 4.0,
+      "time_diff_days": 3.45
+    },
+    {
+      "s1_id": "S1A_IW_GRDH_1SDV_20230623T000000",
+      "s1_date": "2023-06-23",
+      "s1_orbit": "descending",
+      "s2_id": "S2B_MSIL2A_20230620T000000",
+      "s2_date": "2023-06-20",
+      "s2_cloud_cover": 4.41,
+      "time_diff_days": 3.58
+    },
+    {
+      "s1_id": "S1A_IW_GRDH_1SDV_20230625T000000",
+      "s1_date": "2023-06-25",
+      "s1_orbit": "descending",
+      "s2_id": "S2B_MSIL2A_20230623T000000",
+      "s2_date": "2023-06-23",
+      "s2_cloud_cover": 1.74,
+      "time_diff_days": 2.25
+    },
+    {
+      "s1_id": "S1A_IW_GRDH_1SDV_20230628T000000",
+      "s1_date": "2023-06-28",
+      "s1_orbit": "ascending",
+      "s2_id": "S2B_MSIL2A_20230626T000000",
+      "s2_date": "2023-06-26",
+      "s2_cloud_cover": 4.18,
+      "time_diff_days": 2.03
+    }
+  ]
+}
