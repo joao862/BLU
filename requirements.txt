@@ -11,6 +11,12 @@ geopandas==0.14.0
 fiona==1.9.5
 rasterio==1.3.8
 
+# Microsoft Planetary Computer
+planetary-computer
+pystac-client
+shapely==2.0.2
+xarray
+
 # Scientific and numerical libraries
 numpy==1.26.4
 pandas==2.1.3
